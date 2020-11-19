@@ -56,7 +56,6 @@
     "environments": {
       "worker": {
         "scripts": {
-          "postdeploy": "python /backend/app.py",
           "build": "webpack"
         }
       }
