@@ -52,7 +52,8 @@
     "environments": {
       "worker": {
         "scripts": {
-          "worker": "exec rake worker"
+          "postdeploy": "python /backend/app.py",
+          "pr-predestroy"
         }
       }
     }

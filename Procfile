@@ -1,2 +1,2 @@
-web:python /backend/app.py -p 5000
-web:node /frontend/src/index.js -p 3000
+web: sh -c 'cd ./backend/ && python3 app.py'
+web: sh -c 'cd ./frontend/ && npm start'
