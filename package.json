@@ -50,9 +50,9 @@
       }
     ],
     "environments": {
-      "test": {
+      "worker": {
         "scripts": {
-          "test": "bundle exec rake test"
+          "worker": "bundle exec rake test"
         }
       }
     }
