@@ -1,2 +1,4 @@
-web: sh -c 'sudo cd ./backend/ && sudo python3 app.py'
-web: sh -c 'sudo cd ./frontend/ && sudo npm build'
+web: sh -c 'cd ./backend/ && python3 app.py'
+web: sh -c 'npm install react-scripts --save'
+web: sh -c 'cd ./frontend/ && npm build'
+web: sh -c 'cd ./frontend/ && npm start'
