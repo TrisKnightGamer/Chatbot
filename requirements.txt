@@ -41,5 +41,4 @@ pyvi==0.1
 django
 gunicorn
 django-heroku
-redis
 Flask-Sockets
