@@ -16,7 +16,7 @@
     "success_url": "",
     "scripts": {
         "postdeploy": "bundle exec rake bootstrap",
-        "pr-predestroy": "bundle exec rake cleanup",
+        "pr-predestroy": "bundle exec rake cleanup"
     },
     "env": {
       "SECRET_TOKEN": {
