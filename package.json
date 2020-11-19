@@ -1,0 +1,59 @@
+{
+    "name": "chatbot-v1.1",
+    "description": "Chatbot help study for student.",
+    "keywords": [
+      "productivity",
+      "HTML5",
+      "python",
+      "java"
+    ],
+    "repository": "https://github.com/TrisKnightGamer/Chatbot",
+    "logo": "https://github.com/TrisKnightGamer/Chatbot/blob/master/frontend/public/icon.png",
+    "success_url": "",
+    "scripts": {
+        "postdeploy": "bundle exec rake bootstrap",
+        "pr-predestroy": "bundle exec rake cleanup",
+    },
+    "env": {
+      "SECRET_TOKEN": {
+        "description": "A secret key for verifying the integrity of signed cookies.",
+        "generator": "secret"
+      },
+      "WEB_CONCURRENCY": {
+        "description": "The number of processes to run.",
+        "value": "8"
+      }
+    },
+    "formation": {
+      "web": {
+        "quantity": 4,
+        "size": "standard-1x"
+      }
+    },
+    "image": "heroku/python",
+    "addons": [
+      "openredis",
+      {
+        "plan": "mongolab:shared-single-small",
+        "as": "MONGO"
+      },
+      {
+        "plan": "heroku-postgresql",
+        "options": {
+          "version": "9.5"
+        }
+      }
+    ],
+    "buildpacks": [
+      {
+        "url": "https://elements.heroku.com/buildpacks/heroku/heroku-buildpack-python"
+      }
+    ],
+    "environments": {
+      "test": {
+        "scripts": {
+          "test": "bundle exec rake test"
+        }
+      }
+    }
+  }
