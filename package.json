@@ -52,7 +52,7 @@
     "environments": {
       "worker": {
         "scripts": {
-          "worker": "bundle exec rake test"
+          "worker": "bundle exec rake worker"
         }
       }
     }
