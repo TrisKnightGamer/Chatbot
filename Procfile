@@ -1,3 +1,2 @@
-web: exec rails server -p 3000
-web: exec rails server -p 5000
-worker:  exec rake jobs:work
+web: bundle exec rails server -p $PORT
+worker:  bundle exec rake jobs:work
