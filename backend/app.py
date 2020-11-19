@@ -22,9 +22,9 @@ import time, random
 
 app = Flask(__name__)
 CORS(app)
-app.run(host='0.0.0.0',port=5000, debug=True)
+app.run(host='58.187.249.160',port=5000, debug=True)
 
-server = pymongo.MongoClient('mongodb://localhost:27017/')
+server = pymongo.MongoClient('mongodb://58.187.249.160:27017/')
 database = server['ChatApp']
 
 messageCollection = database['messages']
