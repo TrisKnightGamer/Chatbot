@@ -18,8 +18,7 @@
     "success_url": "",
     "scripts": {
       "start": "npm start",
-      "build": "npm build",
-      "heroku-postbuild": "serve -s build"
+      "build": "npm build"
     },
     "env": {
       "SECRET_TOKEN": {
