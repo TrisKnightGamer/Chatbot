@@ -7,7 +7,7 @@ from keras.models import Sequential
 from keras.layers import LSTM, Dense, Dropout
 from sklearn.preprocessing import LabelEncoder
 import preprocessor
-from preprocessor import Preprocessor as CustomPreprocessor #NLP.main.
+from backend.NLP.main.preprocessor import Preprocessor as CustomPreprocessor #NLP.main.
 from gensim.models.word2vec import Word2Vec
 from gensim.models.keyedvectors import KeyedVectors
 from keras import backend as K
