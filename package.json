@@ -18,8 +18,8 @@
     "success_url": "",
     "scripts": {
       "start": "node index.js",
-      "build": "ng build",
-      "heroku-postbuild": "ng build --prod"
+      "build": "npm build",
+      "heroku-postbuild": "serve -s build"
     },
     "env": {
       "SECRET_TOKEN": {
