@@ -9,10 +9,10 @@ import ast
 import os
 import time
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-from api.wolframalpha import search_and_solve as search_wolfram
-from api.wiki import search as search_wiki
-from api.google_search import search_google
-from api.weather import weather
+from backend.api.wolframalpha import search_and_solve as search_wolfram
+from backend.api.wiki import search as search_wiki
+from backend.api.google_search import search_google
+from backend.api.weather import weather
 
 from gensim.models.word2vec import Word2Vec
 import NLP.main.text_classifier
