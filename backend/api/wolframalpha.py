@@ -2,7 +2,6 @@ import requests
 import wolframalpha
 import random
 import urllib.parse
-from api.chemical_balancer import balancer
 APP_ID = 'HAXXWJ-TTLV7WAGP5'
 client = wolframalpha.Client(APP_ID)
 
