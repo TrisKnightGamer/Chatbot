@@ -1,2 +1,2 @@
-web: sh -c 'cd ./backend/ && python3 app.py'
-web: sh -c 'cd ../frontend/ && serve -s build'
+web: sh -c 'cd /frontend/ && npm install && npm start'
+web: sh -c 'cd ../backend/ && python3 app.py'
