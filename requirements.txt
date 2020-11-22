@@ -39,6 +39,5 @@ wolframalpha==4.0.0
 google-search==1.0.2
 pyvi==0.1
 django
-gunicorn
+gunicorn flask
 django-heroku
-Flask-Sockets
