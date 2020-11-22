@@ -2,7 +2,6 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 from flask_cors import CORS
-from flask_sockets import Sockets
 import requests
 import pymongo
 import json
@@ -24,7 +23,6 @@ import time, random
 app = Flask(__name__)
 CORS(app)
 #app.run(host='0.0.0.0',port=5000, debug=True)
-sockets = Sockets(app)
 
 server = pymongo.MongoClient('mongodb://0.0.0.0:27017/')
 database = server['ChatApp']
