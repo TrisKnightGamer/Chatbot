@@ -15,9 +15,9 @@ from backend.api.google_search import search_google
 from backend.api.weather import weather
 
 from gensim.models.word2vec import Word2Vec
-import NLP.main.text_classifier
-from NLP.main.text_classifier import TextClassifier
-from NLP.main.text_classifier import classifier
+import backend.NLP.main.text_classifier
+from backend.NLP.main.text_classifier import TextClassifier
+from backend.NLP.main.text_classifier import classifier
 import time, random
 
 app = Flask(__name__)
