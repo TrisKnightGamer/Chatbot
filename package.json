@@ -17,8 +17,8 @@
     "logo": "https://github.com/TrisKnightGamer/Chatbot/blob/master/frontend/public/icon.png",
     "success_url": "",
     "scripts": {
-      "build": "npm build",
-      "start": "npm run build"
+      "build:ui": "cd ./frontend && npm install && npm run build" ,
+      "start": "serve -s build"
     },
     "env": {
       "SECRET_TOKEN": {

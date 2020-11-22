@@ -1,2 +1,2 @@
-web: npm run build
+web: npm build
 workers: python app.py
