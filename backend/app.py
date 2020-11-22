@@ -23,7 +23,7 @@ import time, random
 
 app = Flask(__name__)
 CORS(app)
-app.run(host='0.0.0.0',port=5000, debug=True)
+#app.run(host='0.0.0.0',port=5000, debug=True)
 sockets = Sockets(app)
 
 server = pymongo.MongoClient('mongodb://0.0.0.0:27017/')
