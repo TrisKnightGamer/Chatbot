@@ -1,7 +1,7 @@
 import numpy as np
 from pyvi import ViTokenizer
-import vi_stop_words
-import vi_spec_words
+import backend.NLP.main.vi_stop_words
+import backend.NLP.main.vi_spec_words
 from backend.NLP.main.vi_stop_words import STOP_WORDS   #NLP.main.
 from backend.NLP.main.vi_spec_words import SPEC_WORDS   #NLP.main.
 import pandas as pd
