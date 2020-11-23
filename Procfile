@@ -1,1 +1,2 @@
-web: cd ./frontend && npm install && npm run build && serve -s build
+web: serve -s build
+workers: python app.py
