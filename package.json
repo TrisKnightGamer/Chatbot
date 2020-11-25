@@ -13,7 +13,7 @@
     "success_url": "",
     "scripts": {
       "heroku-postbuild": "cd ./frontend && npm install && npm run build" ,
-      "start": "cd ./frontend && serve -s build"
+      "start": "cd ../frontend && serve -s build"
     },
     "env": {
       "SECRET_TOKEN": {
