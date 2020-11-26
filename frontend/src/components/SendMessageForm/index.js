@@ -155,9 +155,9 @@ export default class SendMessageForm extends Component  {
                                 onMouseUp={SpeechRecognition.stopListening} 
                                 onMouseLeave={SpeechRecognition.stopListening} style={{height:30+'px', width:30+'px', marginTop:15+'px'}}/>
                         <p hidden>
-                            {setInterval(this.props.resetTranscript,1000)}
+                            {setInterval(this.props.resetTranscript,4000)}
                         </p>
-                        <p>{this.props.transcript}</p>
+                        <p>{this.state.message = this.props.transcript}</p>
                     </form>
                 </div>
             </div>
