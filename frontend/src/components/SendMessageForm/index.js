@@ -180,6 +180,9 @@ export default class SendMessageForm extends Component  {
             <div className="SendMessageForm">
                 <div className="chat-input-width-100">
                     <form className="MessageForm" onKeyUp={this.handleEnter}>
+                        <button className="sender" type="button" onClick={(e) => this.handleSubmit(e)}>
+                            <img src="send.png" alt=""/>
+                        </button> 
                         <TextField
                             name="message"
                             id="outlined-multiline-static"
@@ -195,7 +198,7 @@ export default class SendMessageForm extends Component  {
                             margin="normal"
                             variant="outlined"
                             onChange={this.onChange}/>
-                        <img src="send.png" alt="button" onMouseDown={(e) => this.handleSubmit(e)} style={{height:30+'px', width:30+'px', marginTop:15+'px'}}/>   
+                         
                         <img src="voice.png" alt="button" onTouchStart={this.handleButtonPress} 
                                 onTouchEnd={SpeechRecognition.stopListening, this.state.message = this.props.transcript, this.handleButtonRelease} 
                                 onMouseDown={this.handleButtonPress} 
