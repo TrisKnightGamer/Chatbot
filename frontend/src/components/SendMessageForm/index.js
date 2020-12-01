@@ -50,7 +50,7 @@ export default class SendMessageForm extends Component  {
         if (this.state.message === "") {
             return
         } else {
-            fetch('http://0.0.0.0:5000/api/v1/messages', {
+            fetch('https://0.0.0.0:5000/api/v1/messages', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ export default class SendMessageForm extends Component  {
                         .then(postResponse => {
                             console.log(postResponse);
                             
-                            fetch('http://0.0.0.0:5000/api/v1/messages/reply', {
+                            fetch('https://0.0.0.0:5000/api/v1/messages/reply', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -124,7 +124,7 @@ export default class SendMessageForm extends Component  {
         if (this.state.message === "") {
             return
         } else {
-            fetch('http://0.0.0.0:5000/api/v1/messages', {
+            fetch('https://0.0.0.0:5000/api/v1/messages', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ export default class SendMessageForm extends Component  {
                         .then(postResponse => {
                             console.log(postResponse);
                             
-                            fetch('http://0.0.0.0:5000/api/v1/messages/reply', {
+                            fetch('https://0.0.0.0:5000/api/v1/messages/reply', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
