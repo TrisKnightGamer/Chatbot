@@ -13,7 +13,8 @@
     "react-dom": "^16.8.6",
     "react-scripts": "^4.0.0",
     "react-speech-recognition": "^3.3.0",
-    "speech-to-text": "^2.9.1"
+    "speech-to-text": "^2.9.1",
+    "serve":"^11.3.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
