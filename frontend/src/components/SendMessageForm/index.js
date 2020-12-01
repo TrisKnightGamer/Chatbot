@@ -119,11 +119,57 @@ export default class SendMessageForm extends Component  {
         }
     }
     
-    handleButtonRelease () {
+    async handleButtonRelease () {
 
-        this.setState({
-            alert:false
-        })
+        if (this.state.message === "") {
+            return
+        } else {
+            fetch('http://0.0.0.0:5000/api/v1/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify({
+                    content: this.state.message,
+                    isBot: false,
+                    time: (new Date().getTime()) / 1000
+                })
+            }).then(res => {
+                if (res.status === 200) {
+                    console.log("Send message successfully")
+                    res
+                        .json()
+                        .then(postResponse => {
+                            console.log(postResponse);
+                            
+                            fetch('http://0.0.0.0:5000/api/v1/messages/reply', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    Accept: 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    content: postResponse.content,
+                                    isBot: false,
+                                    time: (new Date().getTime()) / 1000
+                                })
+                            }).then(res => {
+                                if (res.status === 200) {
+                                    console.log("Wait for reply ...")
+                                } else {
+                                    console.log("Some error occured");
+
+                                }
+                            })
+                        })
+
+                } else {
+                    console.log("Some error occured");
+                }
+            }).then(this.setState({message: ""}))
+
+        }
     }
 
     render() {
@@ -150,14 +196,13 @@ export default class SendMessageForm extends Component  {
                             variant="outlined"
                             onChange={this.onChange}/>   
                         <img src="voice.png" alt="button" onTouchStart={this.handleButtonPress} 
-                                onTouchEnd={SpeechRecognition.stopListening} 
+                                onTouchEnd={SpeechRecognition.stopListening, this.state.message = this.props.transcript, this.handleButtonRelease} 
                                 onMouseDown={this.handleButtonPress} 
-                                onMouseUp={SpeechRecognition.stopListening} 
-                                onMouseLeave={SpeechRecognition.stopListening} style={{height:30+'px', width:30+'px', marginTop:15+'px'}}/>
+                                onMouseUp={SpeechRecognition.stopListening, this.state.message = this.props.transcript, this.handleButtonRelease} 
+                                onMouseLeave={SpeechRecognition.stopListening, this.state.message = this.props.transcript, this.handleButtonRelease} style={{height:30+'px', width:30+'px', marginTop:15+'px'}}/>
                         <p hidden>
                             {setInterval(this.props.resetTranscript,4000)}
                         </p>
-                        <p>{this.state.message = this.props.transcript}</p>
                     </form>
                 </div>
             </div>
