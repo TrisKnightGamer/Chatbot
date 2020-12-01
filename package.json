@@ -1,0 +1,16 @@
+{
+  "name": "chatbot",
+  "version": "1.0.70",
+  "description": "Chatbot frontend with nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "chatbot",
+    "python"
+  ],
+  "author": "HoangDucTri",
+  "license": "MIT"
+}
