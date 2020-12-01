@@ -18,7 +18,7 @@ def weather(content, is_general=True):
             content = i
             content.replace('_', ' ')
             content.lower()
-            with open('C:/Users/Trihd/OneDrive/chatbot_NEW/backend/NLP/data/location.json', encoding="utf8") as f:
+            with open('/app/chatbot_NEW/backend/NLP/data/location.json', encoding="utf8") as f:
                 data = json.load(f)
                 main = data['main']
                 length = len(main)
