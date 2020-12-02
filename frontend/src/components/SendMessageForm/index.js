@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {TouchableOpacity} from "react-native";
 import {TextField} from "@material-ui/core";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 // import Icon  from "@material-ui/icons";
