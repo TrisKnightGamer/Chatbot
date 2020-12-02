@@ -1,6 +1,6 @@
 {
   "name": "chatbot-react",
-  "version": "0.1.0",
+  "version": "1.0.86",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.2.1",
@@ -12,6 +12,7 @@
     "react-dom": "^16.8.6",
     "react-scripts": "^4.0.0",
     "react-speech-recognition": "^3.3.0",
+    "serve": "^11.3.2",
     "speech-to-text": "^2.9.1"
   },
   "scripts": {

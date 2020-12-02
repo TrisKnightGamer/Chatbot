@@ -1,6 +1,6 @@
 {
   "name": "chatbot",
-  "version": "1.0.74",
+  "version": "1.0.86",
   "description": "Chatbot frontend with nodejs",
   "main": "index.js",
   "dependencies": {
