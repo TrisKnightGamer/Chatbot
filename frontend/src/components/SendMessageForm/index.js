@@ -198,10 +198,17 @@ export default class SendMessageForm extends Component  {
                             margin="normal"
                             variant="outlined"
                             onChange={this.onChange}/>
-                         
-                        <img src="voice.png" alt="button" onLongPress={this.handleButtonPress} 
+                        <TouchableOpacity
+                            onPress={this._onPress}
+                            onLongPress={this._onLongPress}
+                            onPressOut={this._onPressOut}
+                        >
+                            <img src="voice.png" alt="button" onLongPress={this.handleButtonPress} 
                                 onPressOut={SpeechRecognition.stopListening, this.state.message = this.props.transcript, this.handleButtonRelease} 
-                                 style={{height:30+'px', width:30+'px', marginTop:15+'px'}}/>
+                                onMouseDown={this.handleButtonPress} 
+                                onMouseUp={SpeechRecognition.stopListening, this.state.message = this.props.transcript, this.handleButtonRelease} 
+                                onMouseLeave={SpeechRecognition.stopListening, this.state.message = this.props.transcript, this.handleButtonRelease} style={{height:30+'px', width:30+'px', marginTop:15+'px'}}/>
+                        </TouchableOpacity> 
                         <p hidden>
                             {setInterval(this.props.resetTranscript,4000)}
                         </p>
