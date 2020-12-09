@@ -4,6 +4,7 @@ import pandas as pd
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 from keras.models import Sequential
+from gensim.models import KeyedVectors
 from keras.layers import LSTM, Dense, Dropout
 from sklearn.preprocessing import LabelEncoder
 import backend.NLP.main.preprocessor
@@ -78,21 +79,14 @@ class TextClassifier:
         y = self.predict(np.array(X))
         y = np.argmax(y, axis=1)
 
-        np.savez_compressed(root_dir + '/app/backend/NLP/data/X',X=X) 
-        np.savez_compressed(root_dir + '/app/backend/NLP/data/y',y=y)
-        X = None
-        y = None
-        X = np.load(root_dir + '/app/backend/NLP/data/X.npz')
-        y = np.load(root_dir + '/app/backend/NLP/data/y.npz')
-        X = X['X']
-        y = y['y']
-
         labels = []
         for lab_ in y:
             if label_dict is None:
                 labels.append(lab_)  
             else:
                 labels.append(label_dict[lab_])
+        X = None
+        y = None
         return labels
 
     def load_model(self):
@@ -183,7 +177,7 @@ root_dir = path[:-1]
 root_dir = '/'.join(root_dir)
 data_path = root_dir + '/app/backend/NLP/data/processed_data4.csv' #/backend/NLP
 #data_path = '/Volumes/ESD-USB/share/chatobt/backend/NLP/data/processed_data3.csv'
-word2vec_model = Word2Vec.load(root_dir + '/app/backend/NLP/models/VNCorpus7.bin') #/backend/NLP
+word2vec_model = KeyedVectors.load(root_dir + '/app/backend/NLP/models/VNCorpus7.wordvectors', mmap='r') #/backend/NLP
 keras_text_classifier = TextClassifier(word2vec_dict=word2vec_model, model_path=root_dir + '/app/backend/NLP/models/sentiment_model7.h5', #/backend/NLP
                                         max_length=20, n_epochs=1)
 #X, y = keras_text_classifier.load_data(data_path)
