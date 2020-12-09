@@ -156,6 +156,10 @@ class TextClassifier:
         return p.tokenize_list_sentences(sentences)
 
     def get_label(self, data_path):
+        d = np.random.randint(0, 20, size=(20000, 10))
+        df = pd.DataFrame(d,
+                        columns=["a", "b", "c"])
+        df.to_csv(data_path, sep='\t', index=False)
         dtype = {
             "a": 'uint16',
             "b": 'uint16',
