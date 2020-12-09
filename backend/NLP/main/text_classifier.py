@@ -156,16 +156,17 @@ class TextClassifier:
         return p.tokenize_list_sentences(sentences)
 
     def get_label(self, data_path):
+        temp_data_path = "/app/backend/NLP/data/temp_processed_data4.csv"
         d = np.random.randint(0, 20, size=(20000, 10))
         df = pd.DataFrame(d,
                         columns=["a", "b", "c"])
-        df.to_csv(data_path, sep='\t', index=False)
+        df.to_csv(temp_data_path, sep='\t', index=False)
         dtype = {
             "a": 'uint16',
             "b": 'uint16',
             "c": 'uint16',
         }
-        df = pd.read_csv(data_path, sep='\t', encoding='utf-8', usecols=["a", "b", "c"], dtype=dtype)
+        df = pd.read_csv(temp_data_path, sep='\t', encoding='utf-8', usecols=["a", "b", "c"], dtype=dtype)
         X = df.values[:, 0]
         y = df.values[:, 1]
         labels = y
