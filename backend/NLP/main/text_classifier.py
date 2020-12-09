@@ -157,7 +157,7 @@ class TextClassifier:
 
     def get_label(self, data_path):
         temp_data_path = "/app/backend/NLP/data/temp_processed_data4.csv"
-        d = np.random.randint(0, 20, size=(20000, 10))
+        d = np.random.randint(0, 20, size=(133393, 3))
         df = pd.DataFrame(d,
                         columns=["a", "b", "c"])
         df.to_csv(temp_data_path, sep='\t', index=False)
