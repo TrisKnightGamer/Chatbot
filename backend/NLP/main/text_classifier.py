@@ -39,6 +39,7 @@ class TextClassifier:
         model.compile(loss=keras.losses.binary_crossentropy,
                       optimizer=keras.optimizers.Adam(),
                       metrics=['accuracy'])
+        K.clear_session()
         return model
 
     def train(self, X, y):
@@ -91,6 +92,7 @@ class TextClassifier:
         """
         self.model = self.build_model((self.max_length, self.word_dim))
         self.model.load_weights(self.model_path)
+        K.clear_session()
 
     def load_data(self, data_path):
         """
@@ -111,7 +113,14 @@ class TextClassifier:
         y = y_train
         X = self.tokenize_sentences(X)
         X = self.word_embed_sentences(X, max_length=self.max_length)
-        return np.array(X), np.array(y)
+        K.clear_session()
+        np.savez_compressed(root_dir + '/chatbot_NEW/backend/NLP/data/X',X=X) 
+        np.savez_compressed(root_dir + '/chatbot_NEW/backend/NLP/data/y',y=y)
+        X = np.load(root_dir + '/chatbot_NEW/backend/NLP/data/X.npz')
+        y = np.load(root_dir + '/chatbot_NEW/backend/NLP/data/y.npz')
+        X = X['X']
+        y = y['y']
+        return X, y
 
     # helper
     def word_embed_sentences(self, sentences, max_length=20):
@@ -162,18 +171,19 @@ class TextClassifier:
 path = os.getcwd().split("\\")
 root_dir = path[:-1]
 root_dir = '/'.join(root_dir)
-data_path = root_dir + '/app/backend/NLP/data/processed_data4.csv' #/backend/NLP
+data_path = root_dir + '/chatbot_NEW/backend/NLP/data/processed_data4.csv' #/backend/NLP
 #data_path = '/Volumes/ESD-USB/share/chatobt/backend/NLP/data/processed_data3.csv'
-word2vec_model = Word2Vec.load(root_dir + '/app/backend/NLP/models/VNCorpus7.bin') #/backend/NLP
-keras_text_classifier = TextClassifier(word2vec_dict=word2vec_model, model_path=root_dir + '/app/backend/NLP/models/sentiment_model7.h5', #/backend/NLP
-                                        max_length=20, n_epochs=5)
-X, y = keras_text_classifier.load_data(data_path)
+word2vec_model = Word2Vec.load(root_dir + '/chatbot_NEW/backend/NLP/models/VNCorpus7.bin') #/backend/NLP
+keras_text_classifier = TextClassifier(word2vec_dict=word2vec_model, model_path=root_dir + '/chatbot_NEW/backend/NLP/models/sentiment_model7.h5', #/backend/NLP
+                                        max_length=20, n_epochs=1)
+#X, y = keras_text_classifier.load_data(data_path)
 labels = keras_text_classifier.get_label(data_path)
 
 #if __name__ == '__main__':
 def classifier(content,is_general=True):
     print("Is generall: --->",is_general)
     #content = ' Help'
+    
     #keras_text_classifier.train(X, y)
     
     test_sentence = ['Lê Duẩn là ai vậy?', 'Giới thiệu về bot', 'cân bằng phương trình NO+O2', 'thời tiết ngày mai như nào ?', 'bot ơi, tui có cái này muốn hỏi', 'giải phương trình bậc 3', content]

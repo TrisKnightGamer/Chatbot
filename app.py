@@ -21,13 +21,14 @@ from backend.NLP.main.text_classifier import classifier
 import time, random
 
 app = Flask(__name__)
-CORS(app)
-app.run(host='0.0.0.0',port=5000, debug=True)
+app.config['SECRET_KEY'] = 'We do it for future !!!'
+app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
-server = pymongo.MongoClient('mongodb://0.0.0.0:27017/')
-database = server['ChatApp']
+server = pymongo.MongoClient("mongodb+srv://admin:nker2019-2021@chatbot.uzmkr.azure.mongodb.net/ChatApp?retryWrites=true&w=majority")
+database = server.ChatApp
 
-messageCollection = database['messages']
+messageCollection = database.messages
 
 start = 0
 end = 0

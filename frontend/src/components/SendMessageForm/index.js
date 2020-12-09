@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TouchableOpacity} from "react-native";
+import useLongPress from "./useLongPress";
 import {TextField} from "@material-ui/core";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 // import Icon  from "@material-ui/icons";
@@ -8,9 +8,23 @@ import './style.css'
 // eslint-disable-next-line
 function Hook(Component) {
     return function WrappedComponent(props) {
-      const transcript = useSpeechRecognition()
-      const resetTranscript = useSpeechRecognition()
-      return <Component {...props} transcript={transcript} resetTranscript={resetTranscript} />;
+        const transcript = useSpeechRecognition()
+        const resetTranscript = useSpeechRecognition()
+        const onLongPress = () => {
+            SpeechRecognition.startListening({continuous: true });
+        };
+
+        const onClick = () => {
+            console.log('click is triggered')
+        }
+
+        const defaultOptions = {
+            shouldPreventDefault: true,
+            delay: 500,
+        };
+        const longPressEvent = useLongPress(onLongPress, onClick, defaultOptions);
+        return <Component {...props} transcript={transcript} resetTranscript={resetTranscript} longPress = {longPressEvent}/>;
+        
     }
 }
 
@@ -51,7 +65,7 @@ export default class SendMessageForm extends Component  {
         if (this.state.message === "") {
             return
         } else {
-            fetch('https://0.0.0.0:5000/api/v1/messages', {
+            fetch('http://127.0.0.1:5000/api/v1/messages', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,7 +84,7 @@ export default class SendMessageForm extends Component  {
                         .then(postResponse => {
                             console.log(postResponse);
                             
-                            fetch('https://0.0.0.0:5000/api/v1/messages/reply', {
+                            fetch('http://127.0.0.1:5000/api/v1/messages/reply', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -121,11 +135,12 @@ export default class SendMessageForm extends Component  {
     }
     
     async handleButtonRelease () {
-
-        if (this.state.message === "") {
+        SpeechRecognition.stopListening();
+        this.state.message = this.props.transcript;
+        if (this.state.message !== this.props.transcript) {
             return
         } else {
-            fetch('https://0.0.0.0:5000/api/v1/messages', {
+            fetch('http://127.0.0.1:5000/api/v1/messages', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -144,7 +159,7 @@ export default class SendMessageForm extends Component  {
                         .then(postResponse => {
                             console.log(postResponse);
                             
-                            fetch('https://0.0.0.0:5000/api/v1/messages/reply', {
+                            fetch('http://127.0.0.1:5000/api/v1/messages/reply', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -157,25 +172,29 @@ export default class SendMessageForm extends Component  {
                                 })
                             }).then(res => {
                                 if (res.status === 200) {
-                                    console.log("Wait for reply ...")
+                                    console.log("Wait for reply ...");
+                                    this.props.resetTranscript();
                                 } else {
                                     console.log("Some error occured");
-
+                                    this.props.resetTranscript();
                                 }
                             })
                         })
+                    this.state.message = this.props.resetTranscript();
 
                 } else {
                     console.log("Some error occured");
+                    this.props.resetTranscript();
                 }
             }).then(this.setState({message: ""}))
-
+            this.props.resetTranscript();
         }
     }
 
     render() {
+
         if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-            return null
+            alert("Browser don't support Speech Recognation. If you want to use this feature please use following browsers : Microsoft Edge, Chrome, Android webview, Samsung Internet");
         }
         return (
             <div className="SendMessageForm">
@@ -199,20 +218,7 @@ export default class SendMessageForm extends Component  {
                             margin="normal"
                             variant="outlined"
                             onChange={this.onChange}/>
-                        <TouchableOpacity
-                            onPress={this._onPress}
-                            onLongPress={this._onLongPress}
-                            onPressOut={this._onPressOut}
-                        >
-                            <img src="voice.png" alt="button" onLongPress={this.handleButtonPress} 
-                                onPressOut={SpeechRecognition.stopListening, this.state.message = this.props.transcript, this.handleButtonRelease} 
-                                onMouseDown={this.handleButtonPress} 
-                                onMouseUp={SpeechRecognition.stopListening, this.state.message = this.props.transcript, this.handleButtonRelease} 
-                                onMouseLeave={SpeechRecognition.stopListening, this.state.message = this.props.transcript, this.handleButtonRelease} style={{height:30+'px', width:30+'px', marginTop:15+'px'}}/>
-                        </TouchableOpacity> 
-                        <p hidden>
-                            {setInterval(this.props.resetTranscript,4000)}
-                        </p>
+                            <img src="voice.png" alt="button" {...this.props.longPress} onTouchEnd={this.handleButtonRelease} onMouseUp={this.handleButtonRelease} onMouseLeave={this.handleButtonRelease} style={{height:30+'px', width:30+'px', marginTop:15+'px'}}/>
                     </form>
                 </div>
             </div>
