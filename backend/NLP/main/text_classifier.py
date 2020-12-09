@@ -164,7 +164,7 @@ class TextClassifier:
         dtype = {
             "a": 'uint16',
             "b": 'uint16',
-            "c": 'uint16',
+            "c": 'uint16'
         }
         df = pd.read_csv(temp_data_path, sep='\t', encoding='utf-8', usecols=["a", "b", "c"], dtype=dtype)
         X = df.values[:, 0]
