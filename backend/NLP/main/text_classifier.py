@@ -14,7 +14,7 @@ from gensim.models.keyedvectors import KeyedVectors
 from keras import backend as K
 
 class TextClassifier:
-    def __init__(self, word2vec_dict, model_path, max_length=20, n_epochs=20, batch_size=6, n_class=8):
+    def __init__(self, word2vec_dict, model_path, max_length=10, n_epochs=20, batch_size=6, n_class=8):
         self.word2vec = word2vec_dict
         self.max_length = max_length
         self.word_dim = self.word2vec.vector_size
@@ -127,7 +127,7 @@ class TextClassifier:
         return X, y
 
     # helper
-    def word_embed_sentences(self, sentences, max_length=20):
+    def word_embed_sentences(self, sentences, max_length=10):
         """
         Helper method to convert word to vector
         :param sentences: input sentences in list of strings format
@@ -162,9 +162,9 @@ class TextClassifier:
                         columns=["a", "b", "c"])
         df.to_csv(temp_data_path, sep='\t', index=False)
         dtype = {
-            "a": 'uint16',
-            "b": 'uint16',
-            "c": 'uint16'
+            "a": 'uint8',
+            "b": 'uint8',
+            "c": 'uint8'
         }
         df = pd.read_csv(temp_data_path, sep='\t', encoding='utf-8', usecols=["a", "b", "c"], dtype=dtype)
         X = df.values[:, 0]
@@ -188,7 +188,7 @@ data_path = root_dir + '/app/backend/NLP/data/processed_data4.csv' #/backend/NLP
 #data_path = '/Volumes/ESD-USB/share/chatobt/backend/NLP/data/processed_data3.csv'
 word2vec_model = KeyedVectors.load(root_dir + '/app/backend/NLP/models/VNCorpus7.wordvectors', mmap='r') #/backend/NLP
 keras_text_classifier = TextClassifier(word2vec_dict=word2vec_model, model_path=root_dir + '/app/backend/NLP/models/sentiment_model7.h5', #/backend/NLP
-                                        max_length=20, n_epochs=1)
+                                        max_length=10, n_epochs=1)
 #X, y = keras_text_classifier.load_data(data_path)
 labels = keras_text_classifier.get_label(data_path)
 
