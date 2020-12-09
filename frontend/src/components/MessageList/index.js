@@ -21,13 +21,13 @@ export default class MessageList extends Component {
         setTimeout(()=>{
             console.log("Waiting for render message") 
         }, 750)
-        const res = await fetch('https://0.0.0.0:5000/api/v1/messages');
+        const res = await fetch('https://34.247.120.53:5000/api/v1/messages');
         const data = await res.json()
         this.setState({msgList: data.results})
         //this.scrollToBottom();
     }
     async componentDidMount() {
-        const res = await fetch('https://0.0.0.0:5000/api/v1/messages');
+        const res = await fetch('https://34.247.120.53:5000/api/v1/messages');
         const data = await res.json()
         console.log(data)
         this.setState({msgList: data.results})
