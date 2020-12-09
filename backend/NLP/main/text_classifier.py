@@ -114,10 +114,10 @@ class TextClassifier:
         X = self.tokenize_sentences(X)
         X = self.word_embed_sentences(X, max_length=self.max_length)
         K.clear_session()
-        np.savez_compressed(root_dir + '/app/chatbot_NEW/backend/NLP/data/X',X=X) 
-        np.savez_compressed(root_dir + '/app/chatbot_NEW/backend/NLP/data/y',y=y)
-        X = np.load(root_dir + '/app/chatbot_NEW/backend/NLP/data/X.npz')
-        y = np.load(root_dir + '/app/chatbot_NEW/backend/NLP/data/y.npz')
+        np.savez_compressed(root_dir + '/app/backend/NLP/data/X',X=X) 
+        np.savez_compressed(root_dir + '/app/backend/NLP/data/y',y=y)
+        X = np.load(root_dir + '/app/backend/NLP/data/X.npz')
+        y = np.load(root_dir + '/app/backend/NLP/data/y.npz')
         X = X['X']
         y = y['y']
         return X, y
@@ -171,10 +171,10 @@ class TextClassifier:
 path = os.getcwd().split("\\")
 root_dir = path[:-1]
 root_dir = '/'.join(root_dir)
-data_path = root_dir + '/app/chatbot_NEW/backend/NLP/data/processed_data4.csv' #/backend/NLP
+data_path = root_dir + '/app/backend/NLP/data/processed_data4.csv' #/backend/NLP
 #data_path = '/Volumes/ESD-USB/share/chatobt/backend/NLP/data/processed_data3.csv'
-word2vec_model = Word2Vec.load(root_dir + '/app/chatbot_NEW/backend/NLP/models/VNCorpus7.bin') #/backend/NLP
-keras_text_classifier = TextClassifier(word2vec_dict=word2vec_model, model_path=root_dir + '/app/chatbot_NEW/backend/NLP/models/sentiment_model7.h5', #/backend/NLP
+word2vec_model = Word2Vec.load(root_dir + '/app/backend/NLP/models/VNCorpus7.bin') #/backend/NLP
+keras_text_classifier = TextClassifier(word2vec_dict=word2vec_model, model_path=root_dir + '/app/backend/NLP/models/sentiment_model7.h5', #/backend/NLP
                                         max_length=20, n_epochs=1)
 #X, y = keras_text_classifier.load_data(data_path)
 labels = keras_text_classifier.get_label(data_path)
