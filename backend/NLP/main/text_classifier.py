@@ -186,18 +186,18 @@ root_dir = path[:-1]
 root_dir = '/'.join(root_dir)
 data_path = root_dir + '/app/backend/NLP/data/processed_data4.csv' #/backend/NLP
 #data_path = '/Volumes/ESD-USB/share/chatobt/backend/NLP/data/processed_data3.csv'
-word2vec_model = KeyedVectors.load(root_dir + '/app/backend/NLP/models/VNCorpus7.wordvectors', mmap='r') #/backend/NLP
-keras_text_classifier = TextClassifier(word2vec_dict=word2vec_model, model_path=root_dir + '/app/backend/NLP/models/sentiment_model7.h5', #/backend/NLP
+
+keras_text_classifier = TextClassifier(word2vec_dict=KeyedVectors.load(root_dir + '/app/backend/NLP/models/VNCorpus7.wordvectors', mmap='r'), model_path=root_dir + '/app/backend/NLP/models/sentiment_model7.h5', #/backend/NLP
                                         max_length=10, n_epochs=1)
 #X, y = keras_text_classifier.load_data(data_path)
-labels = keras_text_classifier.get_label(data_path)
+#keras_text_classifier.train(X, y)
 
 #if __name__ == '__main__':
 def classifier(content,is_general=True):
     print("Is generall: --->",is_general)
     #content = ' Help'
     
-    #keras_text_classifier.train(X, y)
+    labels = keras_text_classifier.get_label(data_path)
     
     test_sentence = ['Lê Duẩn là ai vậy?', 'Giới thiệu về bot', 'cân bằng phương trình NO+O2', 'thời tiết ngày mai như nào ?', 'bot ơi, tui có cái này muốn hỏi', 'giải phương trình bậc 3', content]
 
