@@ -156,7 +156,12 @@ class TextClassifier:
         return p.tokenize_list_sentences(sentences)
 
     def get_label(self, data_path):
-        df = pd.read_csv(data_path, encoding='utf-8', usecols=[1, 2])
+        dtype = {
+            "a": 'uint16',
+            "b": 'uint16',
+            "c": 'uint16',
+        }
+        df = pd.read_csv(data_path, sep='\t', encoding='utf-8', usecols=["a", "b", "c"], dtype=dtype)
         X = df.values[:, 0]
         y = df.values[:, 1]
         labels = y
@@ -169,7 +174,6 @@ class TextClassifier:
                 pass
             else:
                 label_dict[row[0]] = row[1]
-        #print(label_dict)
         return label_dict
 
 path = os.getcwd().split("\\")
