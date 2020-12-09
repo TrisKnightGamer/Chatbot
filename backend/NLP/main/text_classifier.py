@@ -77,6 +77,16 @@ class TextClassifier:
         X = self.word_embed_sentences(X, max_length=self.max_length)
         y = self.predict(np.array(X))
         y = np.argmax(y, axis=1)
+
+        np.savez_compressed(root_dir + '/app/backend/NLP/data/X',X=X) 
+        np.savez_compressed(root_dir + '/app/backend/NLP/data/y',y=y)
+        X = None
+        y = None
+        X = np.load(root_dir + '/app/backend/NLP/data/X.npz')
+        y = np.load(root_dir + '/app/backend/NLP/data/y.npz')
+        X = X['X']
+        y = y['y']
+
         labels = []
         for lab_ in y:
             if label_dict is None:
