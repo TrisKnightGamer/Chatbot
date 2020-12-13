@@ -21,7 +21,7 @@ from backend.NLP.main.text_classifier import classifier
 import time, random
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'We do it for future !!!'
+app.config['SECRET_KEY'] = 'We do it for the future !!!'
 app.config['CORS_HEADERS'] = 'Content-Type'
 cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
